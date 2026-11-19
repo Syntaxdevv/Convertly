@@ -5,8 +5,6 @@ import {
   FileText,
   Image as ImageIcon,
   FileSpreadsheet,
-  Video,
-  Music,
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
