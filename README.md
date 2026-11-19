@@ -1,32 +1,69 @@
 # Convertly
 
-A web-based file conversion toolkit built with React, TypeScript, and Vite. Convert documents, images, spreadsheets, and other supported file formats through a simple and user-friendly interface.
+A file conversion platform for documents, images, spreadsheets, and PDF files.
+
+Convertly provides a centralized collection of file conversion utilities through a streamlined web interface. Built with a modern frontend stack and serverless API architecture, it simplifies file processing without requiring users to install desktop conversion software.
+
+[Live Application](https://convertly-sand.vercel.app/) 
+
+---
+
+## Overview
+
+Convertly is designed to make file conversion accessible through a simple, consistent workflow. Users can select a conversion tool, upload their files, process them, and retrieve the converted output.
+
+The application combines client-side interactions with server-side processing, external conversion services, and usage management.
 
 ## Features
 
-- PDF converters
-- Image converters
-- Excel and CSV converters
-- Word document converters
-- File compression and utility tools
-- Responsive interface
-- File processing and conversion tools
+- Multiple file conversion utilities
+- PDF, document, image, and spreadsheet processing
+- Dedicated conversion workflows
+- Serverless API endpoints
+- Usage tracking and request limits
+- Responsive user interface
+- Downloadable conversion results
 
-## Tech Stack
+## Technology Stack
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
+| Technology | Role |
+|---|---|
+| React | UI development |
+| TypeScript | Type safety |
+| Vite | Development and build tooling |
+| Tailwind CSS | Styling |
+| Node.js | Server-side runtime |
+| PDF-Lib | PDF processing |
+| Vercel | Hosting and serverless infrastructure |
+
+## Integrations
+
+| Service | Purpose |
+|---|---|
+| Adobe PDF Services API | PDF and document processing |
+| PDFConversionAPI | File conversion processing |
+| iLovePDF API | PDF processing and conversion tools |
+| Upstash Redis | Usage tracking and request-limit management |
+
+## Getting Started
+
+### Prerequisites
+
 - Node.js
-- PDF-Lib
+- npm
+- Git
 
-## Installation
+### Installation
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/Syntaxdevv/Convertly.git
+```
+
+Navigate to the project directory:
+
+```bash
 cd Convertly
 ```
 
@@ -36,26 +73,31 @@ Install dependencies:
 npm install
 ```
 
-Start the development server:
+### Development
+
+Start the local development server:
 
 ```bash
 npm run dev
 ```
 
-## Production Build
+### Build
+
+Compile the application for production:
 
 ```bash
 npm run build
 ```
 
-## Project Status
+### Preview
 
-Convertly is an ongoing personal web development project.
+Preview the production build locally:
 
-## Developer
+```bash
+npm run preview
+```
 
-GitHub: [Syntaxdevv](https://github.com/Syntaxdevv)
+## License
 
----
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Built as a personal web development project.
