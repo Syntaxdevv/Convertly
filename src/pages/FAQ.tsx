@@ -19,11 +19,6 @@ const faqs = [
       "Choose the conversion tool you need, upload your file, and click the convert button. Once processing is complete, you can download your converted file.",
   },
   {
-    question: "Do I need to create an account?",
-    answer:
-      "No account is required for the available conversion tools. You can use the website directly and start converting your files.",
-  },
-  {
     question: "Is Convertly free to use?",
     answer:
       "Yes, Convertly is free to use. Some conversion tools that rely on external processing services have a daily usage limit to help manage service availability.",
@@ -37,16 +32,6 @@ const faqs = [
     question: "Is my daily limit shared across converters?",
     answer:
       "Yes. Your daily usage is shared across supported external API-powered conversion tools. Using one converter counts toward the same daily limit.",
-  },
-  {
-    question: "Can I use Convertly on different devices?",
-    answer:
-      "Convertly identifies usage by browser and device identifier. Using another device or browser may have a separate usage count.",
-  },
-  {
-    question: "Are my uploaded files safe?",
-    answer:
-      "Files are submitted to the processing service required by the selected conversion tool. Avoid uploading confidential, sensitive, or personal files unless you are comfortable with the processing involved.",
   },
 ];
 
