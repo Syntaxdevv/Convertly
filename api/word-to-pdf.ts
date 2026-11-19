@@ -8,7 +8,7 @@ import {
   redis,
   releaseUsage,
   reserveUsage,
-} from "./_lib/usage";
+} from "./_lib/usage.js";
 
 dotenv.config({ path: ".env.local" });
 
