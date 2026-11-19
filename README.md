@@ -99,5 +99,5 @@ npm run preview
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Permission is required from the author before copying, modifying, redistributing, or using this project or any part of its source code.
 
