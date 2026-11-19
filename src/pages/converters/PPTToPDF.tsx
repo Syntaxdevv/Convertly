@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, DragEvent } from "react";
 import {
@@ -13,6 +14,7 @@ import {
 
 import { useExternalApiUsage } from "../../hooks/useExternalApiUsage";
 import ExternalApiUsage from "../../components/converters/ExternalApiUsage";
+import { getDeviceId } from "../../lib/deviceId";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -142,6 +144,7 @@ export default function PPTToPDF() {
         method: "POST",
         headers: {
           "Content-Type": "application/octet-stream",
+          "x-convertly-device-id": getDeviceId(),
         },
         body: selectedFile,
       });
@@ -278,7 +281,11 @@ export default function PPTToPDF() {
               isDragging
                 ? "border-[#C62828] bg-red-50"
                 : "border-gray-300 bg-[#FAFAFA] hover:border-[#C62828] hover:bg-red-50/40"
-            } ${status === "processing" ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
+            } ${
+              status === "processing"
+                ? "cursor-not-allowed opacity-60"
+                : "cursor-pointer"
+            }`}
           >
             <input
               ref={fileInputRef}

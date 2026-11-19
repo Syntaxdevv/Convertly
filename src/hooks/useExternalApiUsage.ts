@@ -1,5 +1,5 @@
-
 import { useCallback, useEffect, useState } from "react";
+import { getDeviceId } from "../lib/deviceId";
 
 interface UsageData {
     success: boolean;
@@ -22,6 +22,9 @@ export function useExternalApiUsage() {
             const response = await fetch("/api/usage", {
                 method: "GET",
                 cache: "no-store",
+                headers: {
+                    "x-convertly-device-id": getDeviceId(),
+                },
             });
 
             const result = await response.json();

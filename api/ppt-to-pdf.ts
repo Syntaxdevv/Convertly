@@ -14,7 +14,7 @@ import {
 
 import {
   createReservationToken,
-  getClientIp,
+  getDeviceId,
   getUsageInfo,
   reserveUsage,
   releaseUsage,
@@ -74,6 +74,7 @@ export default async function handler(
         message: "PowerPoint file must not exceed 10 MB.",
       });
     }
+
     const isPPTX =
       pptBuffer.length >= 4 && pptBuffer[0] === 0x50 && pptBuffer[1] === 0x4b;
 
@@ -91,16 +92,16 @@ export default async function handler(
 
     const mimeType = isPPTX ? MimeType.PPTX : MimeType.PPT;
 
-    const ip = getClientIp(request);
+    const deviceId = getDeviceId(request);
 
-    if (!ip) {
+    if (!deviceId) {
       return response.status(400).json({
         success: false,
-        message: "Unable to identify visitor.",
+        message: "Device ID is required.",
       });
     }
 
-    const usage = getUsageInfo(ip);
+    const usage = getUsageInfo(deviceId);
 
     reservationKey = usage.key;
     reservationToken = createReservationToken();
@@ -134,7 +135,6 @@ export default async function handler(
       credentials,
     });
 
-    // Upload PowerPoint file to Adobe.
     const inputAsset = await pdfServices.upload({
       readStream: Readable.from(pptBuffer),
       mimeType,
@@ -170,12 +170,10 @@ export default async function handler(
     console.log("Adobe PowerPoint to PDF conversion completed.");
 
     response.setHeader("Content-Type", "application/pdf");
-
     response.setHeader(
       "Content-Disposition",
       'attachment; filename="convertly-presentation.pdf"',
     );
-
     response.setHeader("Cache-Control", "no-store");
 
     await pipeline(output.readStream, response);

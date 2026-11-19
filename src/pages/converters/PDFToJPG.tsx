@@ -14,6 +14,7 @@ import {
 
 import { useExternalApiUsage } from "../../hooks/useExternalApiUsage";
 import ExternalApiUsage from "../../components/converters/ExternalApiUsage";
+import { getDeviceId } from "../../lib/deviceId";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -137,6 +138,7 @@ export default function PDFToJPG() {
         method: "POST",
         headers: {
           "Content-Type": "application/octet-stream",
+          "x-convertly-device-id": getDeviceId(),
         },
         body: selectedFile,
       });

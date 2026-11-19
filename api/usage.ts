@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-
-import { DAILY_LIMIT, getClientIp, getUsageInfo, redis } from "./_lib/usage.js";
+import { DAILY_LIMIT, getDeviceId, getUsageInfo, redis } from "./_lib/usage.js";
 
 export default async function handler(
   request: VercelRequest,
@@ -14,18 +13,17 @@ export default async function handler(
   }
 
   try {
-    const ip = getClientIp(request);
+    const deviceId = getDeviceId(request);
 
-    if (!ip) {
+    if (!deviceId) {
       return response.status(400).json({
         success: false,
-        message: "Unable to identify visitor.",
+        message: "Device ID is required.",
       });
     }
 
-    const { key } = getUsageInfo(ip);
-
-    const used = Number(await redis.scard(key));
+    const { key } = getUsageInfo(deviceId);
+    const used = await redis.scard(key);
     const remaining = Math.max(0, DAILY_LIMIT - used);
 
     return response.status(200).json({
@@ -35,12 +33,10 @@ export default async function handler(
       remaining,
       resetTimezone: "Asia/Manila",
     });
-  } catch (error) {
-    console.error("Usage API error:", error);
-
-    return response.status(503).json({
+  } catch {
+    return response.status(500).json({
       success: false,
-      message: "Unable to check conversion usage.",
+      message: "Unable to load conversion usage.",
     });
   }
 }

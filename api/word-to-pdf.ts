@@ -3,9 +3,8 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 import {
   createReservationToken,
-  getClientIp,
+  getDeviceId,
   getUsageInfo,
-  redis,
   releaseUsage,
   reserveUsage,
 } from "./_lib/usage.js";
@@ -85,16 +84,16 @@ export default async function handler(
       });
     }
 
-    const ip = getClientIp(request);
+    const deviceId = getDeviceId(request);
 
-    if (!ip) {
+    if (!deviceId) {
       return response.status(400).json({
         success: false,
-        message: "Unable to identify visitor.",
+        message: "Device ID is required.",
       });
     }
 
-    const usage = getUsageInfo(ip);
+    const usage = getUsageInfo(deviceId);
 
     reservationKey = usage.key;
     reservationToken = createReservationToken();
@@ -127,7 +126,6 @@ export default async function handler(
 
     formData.append("File", fileBlob, "convertly-document.docx");
 
-    // Send DOCX to PDFConversionAPI.
     const apiResponse = await fetch(API_URL, {
       method: "POST",
       headers: {
@@ -172,14 +170,11 @@ export default async function handler(
     reservationToken = null;
 
     response.setHeader("Content-Type", "application/pdf");
-
     response.setHeader(
       "Content-Disposition",
       'attachment; filename="convertly-document.pdf"',
     );
-
     response.setHeader("Content-Length", pdfBuffer.length);
-
     response.setHeader("Cache-Control", "no-store");
 
     return response.status(200).send(pdfBuffer);

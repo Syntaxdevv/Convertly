@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, DragEvent } from "react";
 import {
@@ -13,6 +14,7 @@ import {
 
 import { useExternalApiUsage } from "../../hooks/useExternalApiUsage";
 import ExternalApiUsage from "../../components/converters/ExternalApiUsage";
+import { getDeviceId } from "../../lib/deviceId";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -136,6 +138,7 @@ export default function PDFToTXT() {
         method: "POST",
         headers: {
           "Content-Type": "application/octet-stream",
+          "x-convertly-device-id": getDeviceId(),
         },
         body: selectedFile,
       });
@@ -293,7 +296,7 @@ export default function PDFToTXT() {
 
             <p className="mt-1 text-sm text-gray-500">
               or{" "}
-              <span className="font-semibold text-[#C62828]">browse files</span>
+              <span className="font-semibold text-[#C62828">browse files</span>
             </p>
 
             <p className="mt-3 text-xs text-gray-400">

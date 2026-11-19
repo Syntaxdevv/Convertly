@@ -2,32 +2,32 @@ import dotenv from "dotenv";
 import { Redis } from "@upstash/redis";
 import { createHash, randomUUID } from "node:crypto";
 import type { VercelRequest } from "@vercel/node";
+
 dotenv.config({ path: ".env.local" });
+
 export const redis = Redis.fromEnv();
 export const DAILY_LIMIT = 3;
 
-export function getClientIp(request: VercelRequest): string | null {
-  const forwardedFor = request.headers["x-forwarded-for"];
+export function getDeviceId(request: VercelRequest): string | null {
+  const deviceId = request.headers["x-convertly-device-id"];
 
-  let ip: string | undefined;
-
-  if (typeof forwardedFor === "string") {
-    ip = forwardedFor.split(",")[0].trim();
-  } else if (Array.isArray(forwardedFor)) {
-    ip = forwardedFor[0]?.split(",")[0].trim();
-  } else {
-    const realIp = request.headers["x-real-ip"];
-
-    ip = Array.isArray(realIp) ? realIp[0] : realIp;
+  if (typeof deviceId !== "string") {
+    return null;
   }
 
-  return ip?.trim() || null;
+  const trimmedDeviceId = deviceId.trim();
+
+  const uuidRegex =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+  if (!uuidRegex.test(trimmedDeviceId)) {
+    return null;
+  }
+
+  return trimmedDeviceId;
 }
 
-/**
- * Generate a daily usage key using Philippine time.
- */
-export function getUsageInfo(ip: string) {
+export function getUsageInfo(deviceId: string) {
   const date = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Manila",
     year: "numeric",
@@ -43,28 +43,19 @@ export function getUsageInfo(ip: string) {
     60,
     Math.ceil((nextMidnight - Date.now()) / 1000) + 60,
   );
-  const hashedIp = createHash("sha256").update(ip).digest("hex");
+
+  const hashedDeviceId = createHash("sha256").update(deviceId).digest("hex");
 
   return {
-    key: `convertly:external-api:${date}:${hashedIp}`,
+    key: `convertly:external-api:${date}:${hashedDeviceId}`,
     expiresIn,
   };
 }
 
-/**
- * Generate a unique reservation token.
- */
 export function createReservationToken(): string {
   return randomUUID();
 }
 
-/**
- * Atomically reserve one conversion slot.
- *
- * Returns:
- * - Current usage count when successful.
- * - -1 when the daily limit is reached.
- */
 export async function reserveUsage(
   key: string,
   token: string,
@@ -92,9 +83,6 @@ export async function reserveUsage(
   return Number(result);
 }
 
-/**
- * Release a reserved slot when conversion fails.
- */
 export async function releaseUsage(key: string, token: string): Promise<void> {
   await redis.srem(key, token);
 }

@@ -13,6 +13,7 @@ import {
 
 import { useExternalApiUsage } from "../../hooks/useExternalApiUsage";
 import ExternalApiUsage from "../../components/converters/ExternalApiUsage";
+import { getDeviceId } from "../../lib/deviceId";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -136,6 +137,7 @@ export default function PDFToWord() {
         method: "POST",
         headers: {
           "Content-Type": "application/octet-stream",
+          "x-convertly-device-id": getDeviceId(),
         },
         body: selectedFile,
       });
@@ -376,8 +378,7 @@ export default function PDFToWord() {
                 <button
                   type="button"
                   onClick={handleDownload}
-                  className="flex items-center justify-center gap-2 rounded-lg bg-[#C62828] px-5 py-3.5 text-sm font-bold text-white transition hover:bg-[#A91F1F]"
-                >
+                  className="flex items-center justify-center gap-2 rounded-lg bg-[#C62828] px-5 py-3.5 text-sm font-bold text-white transition hover:bg-[#A91F1F]" >
                   <Download size={18} />
                   Download Word File
                 </button>
@@ -385,8 +386,7 @@ export default function PDFToWord() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-3.5 text-sm font-semibold text-gray-600 transition hover:bg-gray-50"
-                >
+                  className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-3.5 text-sm font-semibold text-gray-600 transition hover:bg-gray-50">
                   <RefreshCw size={17} />
                   Convert another file
                 </button>

@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, DragEvent } from "react";
 import {
@@ -14,6 +15,7 @@ import {
 
 import { useExternalApiUsage } from "../../hooks/useExternalApiUsage";
 import ExternalApiUsage from "../../components/converters/ExternalApiUsage";
+import { getDeviceId } from "../../lib/deviceId";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -57,7 +59,6 @@ export default function ExcelToPDF() {
 
   const validateFile = (file: File): string | null => {
     const lowerName = file.name.toLowerCase();
-
     const isExcel = lowerName.endsWith(".xlsx") || lowerName.endsWith(".xls");
 
     if (!isExcel) {
@@ -86,7 +87,6 @@ export default function ExcelToPDF() {
     }
 
     clearDownload();
-
     setSelectedFile(file);
     setStatus("idle");
     setError("");
@@ -95,7 +95,9 @@ export default function ExcelToPDF() {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) handleFileSelect(file);
+    if (file) {
+      handleFileSelect(file);
+    }
 
     event.target.value = "";
   };
@@ -108,7 +110,9 @@ export default function ExcelToPDF() {
 
     const file = event.dataTransfer.files?.[0];
 
-    if (file) handleFileSelect(file);
+    if (file) {
+      handleFileSelect(file);
+    }
   };
 
   const handleConvert = async () => {
@@ -152,6 +156,7 @@ export default function ExcelToPDF() {
         method: "POST",
         headers: {
           "Content-Type": "application/octet-stream",
+          "x-convertly-device-id": getDeviceId(),
         },
         body: selectedFile,
       });
@@ -213,7 +218,6 @@ export default function ExcelToPDF() {
 
   const handleReset = () => {
     clearDownload();
-
     setSelectedFile(null);
     setStatus("idle");
     setError("");
