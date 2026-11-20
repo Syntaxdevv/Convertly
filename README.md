@@ -1,49 +1,85 @@
-# Convertly
 
-A file conversion platform for documents, images, spreadsheets, and PDF files.
+<p align="center">
+  <img src="src/assets/pic.png" alt="Convertly Preview" width="100%" />
+</p>
+<h1 align="center">Convertly</h1>
 
-Convertly provides a centralized collection of file conversion utilities through a streamlined web interface. Built with a modern frontend stack and serverless API architecture, it simplifies file processing without requiring users to install desktop conversion software.
+<p align="center">
+  Simple. Fast. Convenient file conversion.
+</p>
 
-[Live Application](https://convertly-sand.vercel.app/) 
+<p align="center">
+  A Web-Based File Conversion Platform
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Development-blue?style=flat" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white" />
+  <img src="https://img.shields.io/badge/Upstash_Redis-00E9A7?style=flat&logo=redis&logoColor=black" />
+</p>
 
 ---
 
-## Overview
+## About
 
-Convertly is designed to make file conversion accessible through a simple, consistent workflow. Users can select a conversion tool, upload their files, process them, and retrieve the converted output.
+Convertly is a web-based file conversion platform that allows users to convert files into different formats through a simple and accessible interface.
 
-The application combines client-side interactions with server-side processing, external conversion services, and usage management.
+The project aims to make file conversion convenient without requiring users to create an account or go through complicated steps. Users can choose a conversion tool, upload their files, and download the converted output.
 
 ## Features
 
-- Multiple file conversion utilities
-- PDF, document, image, and spreadsheet processing
-- Dedicated conversion workflows
-- Serverless API endpoints
-- Usage tracking and request limits
-- Responsive user interface
-- Downloadable conversion results
+- **Multiple File Converters** — Convert files between supported formats.
+- **Simple User Interface** — Clean and straightforward conversion workflow.
+- **No Account Required** — Access conversion tools without registration.
+- **Daily Usage Limit** — Usage limit for supported external API converters.
+- **Shared Conversion Quota** — Daily usage is shared across supported converters.
+- **Responsive Interface** — Designed for different screen sizes.
+- **File Download** — Download converted files after processing.
 
-## Technology Stack
+## Available Converters
 
-| Technology | Role |
+| Converter | Description |
 |---|---|
-| React | UI development |
-| TypeScript | Type safety |
-| Vite | Development and build tooling |
-| Tailwind CSS | Styling |
-| Node.js | Server-side runtime |
-| PDF-Lib | PDF processing |
-| Vercel | Hosting and serverless infrastructure |
+| PDF to Word | Convert PDF documents into Word files |
+| PDF to TXT | Extract text from PDF files |
+| Excel to PDF | Convert Excel spreadsheets into PDF documents |
+| PowerPoint to PDF | Convert PowerPoint presentations into PDF files |
 
-## Integrations
+More conversion tools are available within the platform.
 
-| Service | Purpose |
+## Daily Usage Limit
+
+Convertly implements a device-based usage limit for supported external API converters.
+
+| Limit | Details |
 |---|---|
-| Adobe PDF Services API | PDF and document processing |
-| PDFConversionAPI | File conversion processing |
-| iLovePDF API | PDF processing and conversion tools |
-| Upstash Redis | Usage tracking and request-limit management |
+| Daily allowance | 3 conversions |
+| Usage tracking | Per device |
+| Shared limit | Shared across supported external converters |
+| Reset schedule | Daily, based on Philippine time (Manila) |
+
+## Tech Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+
+### Backend & Services
+
+- Vercel Serverless Functions
+- Upstash Redis
+- External conversion APIs
+
+### Deployment
+
+- Vercel
 
 ## Getting Started
 
@@ -51,51 +87,42 @@ The application combines client-side interactions with server-side processing, e
 
 - Node.js
 - npm
-- Git
 
 ### Installation
 
-Clone the repository:
+1. Clone the repository:
 
-```bash
-git clone https://github.com/Syntaxdevv/Convertly.git
-```
+   ```bash
+   git clone https://github.com/Syntaxdevv/Convertly.git
+   ```
 
-Navigate to the project directory:
+2. Navigate to the project folder:
 
-```bash
-cd Convertly
-```
+   ```bash
+   cd Convertly
+   ```
 
-Install dependencies:
+3. Install dependencies:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-### Development
+4. Configure the required environment variables for the conversion services and usage tracking.
 
-Start the local development server:
+5. Start the development server:
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
-### Build
+## Available Scripts
 
-Compile the application for production:
-
-```bash
-npm run build
-```
-
-### Preview
-
-Preview the production build locally:
-
-```bash
-npm run preview
-```
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build the project for production |
+| `npm run preview` | Preview the production build locally |
 
 ## License
 
