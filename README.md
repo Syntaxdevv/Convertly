@@ -73,9 +73,8 @@ Convertly implements a device-based usage limit for supported external API conve
 
 ### Backend & Services
 
-- Vercel Serverless Functions
+- Adobe PDF Services API
 - Upstash Redis
-- External conversion APIs
 
 ### Deployment
 
