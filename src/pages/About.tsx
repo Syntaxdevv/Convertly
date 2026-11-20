@@ -52,8 +52,7 @@ export default function About() {
 
               <p className="mt-5 text-[15px] leading-[1.9] tracking-[-0.01em] text-[#686868] sm:text-base">
                 With different tools organized in one place, users can find
-                options for working with documents, images, spreadsheets, and
-                media files without unnecessary searching.
+                options for working with documents, images, spreadsheets files without unnecessary searching.
               </p>
 
               <a
