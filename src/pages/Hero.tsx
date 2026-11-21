@@ -78,8 +78,7 @@ export default function Hero({
         </h1>
 
         <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-gray-500 sm:text-lg">
-          Find the right converter for your documents, images, spreadsheets, and
-          media files. Make file conversion straightforward.
+          Find the right converter for your documents, images,and spreadsheets files. Make file conversion straightforward.
         </p>
 
         <div className="mx-auto mt-10 max-w-2xl">
