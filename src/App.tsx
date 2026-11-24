@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Home from "./pages/Home";
 import Converter from "./pages/Converter";
 import CustomCursor from "./components/animations/CustomCursor";
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/convert/:slug" element={<Converter />} />
                 </Routes>
+                <Analytics />
             </div>
         </BrowserRouter>
     );
